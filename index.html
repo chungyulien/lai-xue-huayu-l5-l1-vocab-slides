@@ -1,0 +1,1373 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>來學華語第五冊 L1 生詞 1-15 HTML 簡報</title>
+  <style>
+    :root {
+      --bg: #f4f2ed;
+      --ink: #1f2933;
+      --muted: #60707d;
+      --line: #d8d3c8;
+      --paper: #fffdfa;
+      --soft: #e8efe9;
+      --teal: #2f6f73;
+      --teal-dark: #17494d;
+      --brick: #a34533;
+      --gold: #ba8542;
+      --shadow: 0 18px 42px rgba(31, 41, 51, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: "DFKai-SB", "BiauKai", "KaiTi", "標楷體", serif;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    button, input, textarea, select {
+      font-family: "DFKai-SB", "BiauKai", "KaiTi", "標楷體", serif;
+    }
+
+    .deck {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    header {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 26px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 253, 250, 0.92);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border: 2px solid var(--teal-dark);
+      display: grid;
+      place-items: center;
+      color: var(--teal-dark);
+      font-weight: 700;
+      font-size: 18px;
+      flex: 0 0 auto;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.2;
+      letter-spacing: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .source-note {
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    main {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 28px clamp(20px, 4vw, 56px);
+      display: none;
+      overflow: auto;
+      max-width: 100vw;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    .slide-inner {
+      width: min(1180px, 100%);
+      min-height: calc(100vh - 150px);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+      gap: 22px;
+      align-items: stretch;
+      min-width: 0;
+    }
+
+    .activity .slide-inner,
+    .intro .slide-inner {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 26px;
+      min-width: 0;
+    }
+
+    .word-panel {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 18px;
+    }
+
+    .slide-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 5px 9px;
+      background: #f7f5f0;
+      color: var(--teal-dark);
+      white-space: nowrap;
+      max-width: 100%;
+    }
+
+    .word-main {
+      display: grid;
+      gap: 12px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hanzi {
+      margin: 0;
+      font-size: clamp(58px, 8vw, 110px);
+      line-height: 0.95;
+      letter-spacing: 0;
+      color: var(--teal-dark);
+    }
+
+    .pinyin {
+      font-size: 30px;
+      color: var(--brick);
+      line-height: 1.15;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      font-size: 18px;
+    }
+
+    .pos {
+      color: #fff;
+      background: var(--teal);
+      border-radius: 6px;
+      padding: 5px 10px;
+      min-width: 46px;
+      text-align: center;
+    }
+
+    .translation {
+      color: var(--ink);
+      font-size: 20px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .info-box {
+      border-left: 4px solid var(--gold);
+      background: #fbf8f1;
+      padding: 14px 15px;
+      min-height: 112px;
+    }
+
+    .info-box.wide {
+      grid-column: 1 / -1;
+    }
+
+    .label {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .info-box p,
+    .info-box ul {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .info-box ul {
+      padding-left: 1.25em;
+    }
+
+    .visual-panel {
+      display: grid;
+      grid-template-rows: 1fr;
+      gap: 16px;
+    }
+
+    .slide-image {
+      width: 100%;
+      height: 100%;
+      min-height: 560px;
+      object-fit: cover;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid rgba(47, 111, 115, 0.25);
+      background: #eef4f2;
+    }
+
+    .scene {
+      min-height: 250px;
+      border-radius: 8px;
+      border: 1px solid rgba(47, 111, 115, 0.25);
+      overflow: hidden;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(245, 248, 246, 0.78), rgba(211, 224, 218, 0.9)),
+        linear-gradient(135deg, #d7e1dd, #f4efe5);
+    }
+
+    .scene::before,
+    .scene::after {
+      content: "";
+      position: absolute;
+      inset: auto auto 0 0;
+      background: rgba(23, 73, 77, 0.78);
+    }
+
+    .scene::before {
+      width: 62%;
+      height: 58%;
+      clip-path: polygon(0 24%, 76% 0, 100% 100%, 0 100%);
+    }
+
+    .scene::after {
+      left: 56%;
+      width: 38%;
+      height: 74%;
+      background: rgba(163, 69, 51, 0.72);
+      clip-path: polygon(14% 0, 86% 8%, 100% 100%, 0 100%);
+    }
+
+    .scene .window {
+      position: absolute;
+      width: 32px;
+      height: 44px;
+      background: rgba(255, 253, 250, 0.72);
+      border: 1px solid rgba(255,255,255,0.76);
+      z-index: 2;
+    }
+
+    .scene .w1 { left: 16%; bottom: 28%; }
+    .scene .w2 { left: 28%; bottom: 38%; }
+    .scene .w3 { left: 67%; bottom: 48%; }
+    .scene .w4 { left: 78%; bottom: 31%; }
+
+    .scene .person {
+      position: absolute;
+      right: 11%;
+      bottom: 8%;
+      width: 46px;
+      height: 96px;
+      z-index: 3;
+    }
+
+    .person::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 13px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #5f4636;
+    }
+
+    .person::after {
+      content: "";
+      position: absolute;
+      top: 26px;
+      left: 8px;
+      width: 30px;
+      height: 62px;
+      background: #233946;
+      clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%);
+    }
+
+    .scene .desk {
+      position: absolute;
+      left: 10%;
+      bottom: 10%;
+      width: 34%;
+      height: 15%;
+      border-radius: 5px;
+      background: rgba(186, 133, 66, 0.75);
+      z-index: 3;
+    }
+
+    .scene .paper-shape {
+      position: absolute;
+      left: 18%;
+      bottom: 29%;
+      width: 30%;
+      height: 36%;
+      border-radius: 6px;
+      background: rgba(255,253,250,0.86);
+      z-index: 3;
+      box-shadow: 0 10px 28px rgba(31,41,51,0.18);
+    }
+
+    .image-desc,
+    .prompt-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf7;
+      padding: 14px 15px;
+      font-size: 18px;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .prompt-box {
+      background: #eef4f2;
+      color: #203b3d;
+      font-size: 16px;
+    }
+
+    .prompt-box code {
+      font-family: "DFKai-SB", "BiauKai", "KaiTi", "標楷體", serif;
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      height: 70px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+      padding: 0 26px;
+      border-top: 1px solid var(--line);
+      background: rgba(255, 253, 250, 0.94);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn {
+      border: 1px solid var(--teal);
+      background: var(--teal);
+      color: #fff;
+      border-radius: 6px;
+      padding: 9px 14px;
+      font-size: 16px;
+      cursor: pointer;
+      min-width: 42px;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--teal-dark);
+    }
+
+    .btn:focus,
+    .choice:focus,
+    .drop-zone:focus {
+      outline: 3px solid rgba(186, 133, 66, 0.45);
+      outline-offset: 2px;
+    }
+
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .progress {
+      height: 8px;
+      background: #ddd8ce;
+      border-radius: 6px;
+      overflow: hidden;
+      width: min(280px, 30vw);
+    }
+
+    .bar {
+      height: 100%;
+      background: var(--teal);
+      width: 0;
+      transition: width 160ms ease;
+    }
+
+    .tools {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+    }
+
+    select {
+      max-width: min(340px, 36vw);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      padding: 8px 10px;
+      color: var(--ink);
+      font-size: 15px;
+    }
+
+    .intro-card {
+      max-width: 1050px;
+      margin: auto;
+    }
+
+    .intro-card h2,
+    .activity h2 {
+      margin: 0 0 16px;
+      font-size: clamp(34px, 4.8vw, 62px);
+      line-height: 1.05;
+      color: var(--teal-dark);
+    }
+
+    .intro-card p,
+    .activity p {
+      font-size: 22px;
+      line-height: 1.65;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .small-block {
+      border-left: 4px solid var(--teal);
+      background: #f7f5f0;
+      padding: 16px;
+      min-height: 120px;
+    }
+
+    .small-block strong {
+      display: block;
+      color: var(--teal-dark);
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .small-block span {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .activity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .choice,
+    .drag-item,
+    .task-item {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 20px;
+      line-height: 1.35;
+      cursor: pointer;
+    }
+
+    .choice.correct {
+      border-color: #2f7d55;
+      background: #e9f5ed;
+    }
+
+    .choice.wrong {
+      border-color: #af4d42;
+      background: #f8e8e5;
+    }
+
+    .activity-image {
+      min-height: 250px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 74% 20%, rgba(186,133,66,0.22), transparent 28%),
+        linear-gradient(135deg, #dce8e2, #f5f1e8);
+      position: relative;
+      overflow: hidden;
+      margin: 18px 0;
+    }
+
+    .activity-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 250px;
+      display: block;
+      object-fit: cover;
+    }
+
+    .activity-image::before {
+      content: "";
+      position: absolute;
+      left: 12%;
+      bottom: 0;
+      width: 72%;
+      height: 78%;
+      background: rgba(23,73,77,0.75);
+      clip-path: polygon(0 28%, 55% 0, 100% 19%, 100% 100%, 0 100%);
+    }
+
+    .activity-image::after {
+      content: "";
+      position: absolute;
+      left: 24%;
+      bottom: 15%;
+      width: 14%;
+      height: 22%;
+      background: rgba(255,253,250,0.72);
+      box-shadow: 90px -22px 0 rgba(255,253,250,0.66), 188px 12px 0 rgba(255,253,250,0.58);
+    }
+
+    .fill-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 12px;
+      margin: 14px 0;
+      font-size: 22px;
+      line-height: 1.55;
+    }
+
+    .fill-row input,
+    textarea {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 20px;
+      background: #fff;
+      width: 100%;
+    }
+
+    .answer {
+      color: var(--teal-dark);
+      font-size: 18px;
+      min-width: 160px;
+      visibility: hidden;
+    }
+
+    .answer.show { visibility: visible; }
+
+    .matching {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .drag-list,
+    .drop-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .drag-item {
+      background: #eef4f2;
+      border-color: rgba(47,111,115,0.35);
+      cursor: grab;
+    }
+
+    .drop-zone {
+      border: 2px dashed #b8c4bd;
+      border-radius: 8px;
+      padding: 13px;
+      min-height: 58px;
+      background: #fbfaf7;
+      font-size: 19px;
+    }
+
+    .drop-zone.matched {
+      border-style: solid;
+      border-color: #2f7d55;
+      background: #e9f5ed;
+    }
+
+    .poll-options {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .poll-result {
+      display: grid;
+      grid-template-columns: 76px 1fr 54px;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .poll-bar {
+      height: 18px;
+      background: #ddd8ce;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .poll-bar span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--brick);
+      transition: width 180ms ease;
+    }
+
+    .role-grid,
+    .talk-grid,
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .role-card,
+    .talk-card,
+    .group-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 18px;
+      min-height: 160px;
+    }
+
+    .role-card h3,
+    .talk-card h3,
+    .group-card h3 {
+      margin: 0 0 12px;
+      color: var(--teal-dark);
+      font-size: 24px;
+    }
+
+    .role-card p,
+    .talk-card p,
+    .group-card p {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.55;
+    }
+
+    .task-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: default;
+    }
+
+    .task-item input {
+      width: 20px;
+      height: 20px;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .deck { min-height: 100vh; }
+      main { overflow: visible; }
+      .slide {
+        position: static;
+        min-height: calc(100vh - 134px);
+        padding: 20px 14px;
+        overflow-x: hidden;
+        width: 100vw;
+      }
+      .slide:not(.active) { display: none; }
+      .slide-inner {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: calc(100vw - 28px);
+        margin: 0;
+      }
+      header {
+        padding: 0 14px;
+        height: 58px;
+      }
+      .brand h1 { font-size: 17px; }
+      .source-note { display: none; }
+      .info-grid,
+      .intro-grid,
+      .activity-grid,
+      .matching,
+      .role-grid,
+      .talk-grid,
+      .group-grid {
+        grid-template-columns: 1fr;
+      }
+      footer {
+        position: sticky;
+        bottom: 0;
+        grid-template-columns: 1fr;
+        height: auto;
+        gap: 10px;
+        padding: 10px 14px;
+      }
+      .progress-wrap,
+      .tools {
+        display: none;
+      }
+      .panel {
+        padding: 20px;
+        width: 100%;
+        max-width: calc(100vw - 28px);
+      }
+      .info-box,
+      .image-desc,
+      .prompt-box,
+      .role-card,
+      .talk-card,
+      .group-card {
+        overflow: hidden;
+      }
+      .info-box p,
+      .info-box ul,
+      .image-desc,
+      .prompt-box,
+      .intro-card p,
+      .activity p {
+        font-size: 18px;
+        max-width: calc(100vw - 88px);
+        word-break: break-all;
+        line-break: anywhere;
+      }
+      .slide-topline {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .tag {
+        white-space: normal;
+      }
+      .hanzi { font-size: 64px; }
+      .pinyin { font-size: 25px; }
+      .slide-image {
+        min-height: 260px;
+      }
+    }
+
+    @media print {
+      body { overflow: visible; background: #fff; }
+      header,
+      footer { display: none; }
+      .slide {
+        position: static;
+        display: block !important;
+        page-break-after: always;
+        min-height: 100vh;
+      }
+      .slide-inner {
+        min-height: auto;
+      }
+      .panel {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <header>
+      <div class="brand">
+        <div class="mark" aria-hidden="true">華</div>
+        <h1>來學華語第五冊 第一課：住宅的類型 生詞 1-15</h1>
+      </div>
+      <div class="source-note">核心生詞依來源資料；例句、搭配為教學補充</div>
+    </header>
+
+    <main id="slides"></main>
+
+    <footer>
+      <div class="progress-wrap">
+        <span id="counter">1 / 1</span>
+        <div class="progress" aria-hidden="true"><div class="bar" id="bar"></div></div>
+      </div>
+      <div class="nav">
+        <button class="btn secondary" id="prevBtn" type="button" aria-label="上一頁">上一頁</button>
+        <button class="btn" id="nextBtn" type="button" aria-label="下一頁">下一頁</button>
+      </div>
+      <div class="tools">
+        <select id="jumpSelect" aria-label="選擇頁面"></select>
+        <button class="btn secondary" type="button" onclick="window.print()">列印</button>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const vocabulary = [
+      {
+        no: 1,
+        hanzi: "住宅",
+        pinyin: "zhùzhái",
+        pos: "N",
+        english: "housing",
+        sentence: "臺灣的住宅類型很多，租房子以前要先了解附近的環境。",
+        collocations: ["住宅類型", "住宅環境", "住宅需求", "選擇住宅"]
+      },
+      {
+        no: 2,
+        hanzi: "類型",
+        pinyin: "lèixíng",
+        pos: "N",
+        english: "type, kind",
+        sentence: "這篇文章介紹四種常見的房屋類型。",
+        collocations: ["房屋類型", "住宅類型", "不同類型", "常見類型"]
+      },
+      {
+        no: 3,
+        hanzi: "國際",
+        pinyin: "guójì",
+        pos: "Vs",
+        english: "international",
+        sentence: "來臺灣的國際朋友常常需要先找住的地方。",
+        collocations: ["國際朋友", "國際學生", "國際交流", "國際社群"]
+      },
+      {
+        no: 4,
+        hanzi: "無論",
+        pinyin: "wúlùn",
+        pos: "Conj",
+        english: "whether, no matter",
+        sentence: "無論是學習還是工作，租房子都是很重要的事。",
+        collocations: ["無論是 A 還是 B", "無論如何", "無論在哪裡", "無論做什麼"]
+      },
+      {
+        no: 5,
+        hanzi: "房屋",
+        pinyin: "fángwū",
+        pos: "N",
+        english: "dwelling, house, residence",
+        sentence: "每一種房屋都有自己的特色和優缺點。",
+        collocations: ["房屋類型", "房屋特色", "房屋租金", "房屋設備"]
+      },
+      {
+        no: 6,
+        hanzi: "主要",
+        pinyin: "zhǔyào",
+        pos: "Vs",
+        english: "primary, main, principal",
+        sentence: "臺灣的房屋主要有公寓、華廈、大樓和透天厝。",
+        collocations: ["主要原因", "主要特色", "主要問題", "主要需求"]
+      },
+      {
+        no: 7,
+        hanzi: "需求",
+        pinyin: "xūqiú",
+        pos: "N",
+        english: "need, requirement",
+        sentence: "每個人可以根據自己的需求選擇適合的房屋。",
+        collocations: ["生活需求", "租屋需求", "個人需求", "符合需求"]
+      },
+      {
+        no: 8,
+        hanzi: "篇",
+        pinyin: "piān",
+        pos: "M",
+        english: "measure word for a written text",
+        sentence: "這篇文章說明了四種房屋類型的特色。",
+        collocations: ["一篇文章", "這篇課文", "那篇報導", "每篇作文"]
+      },
+      {
+        no: 9,
+        hanzi: "文章",
+        pinyin: "wénzhāng",
+        pos: "N",
+        english: "article, essay",
+        sentence: "老師請我們先讀文章，再比較不同房屋。",
+        collocations: ["讀文章", "寫文章", "文章內容", "這篇文章"]
+      },
+      {
+        no: 10,
+        hanzi: "戶",
+        pinyin: "hù",
+        pos: "M",
+        english: "measure word for a household",
+        sentence: "公寓每層通常有兩戶。",
+        collocations: ["一戶人家", "兩戶住戶", "每層兩戶", "住戶"]
+      },
+      {
+        no: 11,
+        hanzi: "由於",
+        pinyin: "yóuyú",
+        pos: "Conj",
+        english: "due to",
+        sentence: "由於屋齡老，公寓的設備比較舊。",
+        collocations: ["由於天氣不好", "由於預算不高", "由於交通方便", "由於設備較舊"]
+      },
+      {
+        no: 12,
+        hanzi: "屋齡",
+        pinyin: "wūlíng",
+        pos: "N",
+        english: "age of a dwelling or residence",
+        sentence: "這棟房子的屋齡比較高，但是地點很好。",
+        collocations: ["屋齡老", "屋齡高", "屋齡新", "查屋齡"]
+      },
+      {
+        no: 13,
+        hanzi: "設備",
+        pinyin: "shèbèi",
+        pos: "N",
+        english: "facilities, equipment",
+        sentence: "大樓的設備通常比較新，也比較充足。",
+        collocations: ["設備新", "設備舊", "公共設備", "設備充足"]
+      },
+      {
+        no: 14,
+        hanzi: "預算",
+        pinyin: "yùsuàn",
+        pos: "N",
+        english: "budget",
+        sentence: "預算不高的人可以先考慮公寓。",
+        collocations: ["預算不高", "預算有限", "租屋預算", "超過預算"]
+      },
+      {
+        no: 15,
+        hanzi: "此外",
+        pinyin: "cǐwài",
+        pos: "Adv",
+        english: "in addition, also",
+        sentence: "公寓附近交通方便，此外，也很容易找到便利商店。",
+        collocations: ["此外，也", "此外，還", "此外，需要注意", "此外，可以"]
+      }
+    ];
+
+    const vocabImageFiles = [
+      "vocab-01-zhuzhai.png",
+      "vocab-02-leixing.png",
+      "vocab-03-guoji.png",
+      "vocab-04-wulun.png",
+      "vocab-05-fangwu.png",
+      "vocab-06-zhuyao.png",
+      "vocab-07-xuqiu.png",
+      "vocab-08-pian.png",
+      "vocab-09-wenzhang.png",
+      "vocab-10-hu.png",
+      "vocab-11-youyu.png",
+      "vocab-12-wuling.png",
+      "vocab-13-shebei.png",
+      "vocab-14-yusuan.png",
+      "vocab-15-ciwai.png"
+    ];
+
+    const activities = [
+      { title: "看圖選詞", kind: "picture-choice" },
+      { title: "句子填空", kind: "fill" },
+      { title: "拖拉配對", kind: "matching" },
+      { title: "IRS 造句互動", kind: "poll" },
+      { title: "角色扮演", kind: "roleplay" },
+      { title: "看圖說話", kind: "picture-talk" },
+      { title: "小組任務", kind: "group-task" }
+    ];
+
+    const slidesEl = document.getElementById("slides");
+    const jumpSelect = document.getElementById("jumpSelect");
+    const counterEl = document.getElementById("counter");
+    const barEl = document.getElementById("bar");
+    let current = 0;
+    let pollCounts = [0, 0, 0];
+
+    function html(strings, ...values) {
+      return strings.reduce((acc, str, i) => acc + str + (values[i] ?? ""), "");
+    }
+
+    function renderIntro() {
+      return html`
+        <section class="slide intro active" data-title="使用說明">
+          <div class="slide-inner">
+            <article class="panel intro-card">
+              <h2>住宅的類型：生詞 1-15</h2>
+              <p>本 HTML 簡報依《來學華語》第五冊第一課來源資料整理核心生詞 1-15。每一個核心生詞單獨一頁，包含漢字、拼音、詞性、英文翻譯、真實風格插圖、例句與常見搭配。</p>
+              <div class="intro-grid">
+                <div class="small-block">
+                  <strong>根據來源</strong>
+                  <span>漢字、拼音、詞性、英文翻譯依 PDF 生詞表。</span>
+                </div>
+                <div class="small-block">
+                  <strong>教學補充</strong>
+                  <span>例句與搭配依成人華語教學邏輯補充；圖片為重新生成的真實風格插圖。</span>
+                </div>
+                <div class="small-block">
+                  <strong>操作方式</strong>
+                  <span>使用上一頁、下一頁、鍵盤左右鍵或下方選單切換頁面。</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>`;
+    }
+
+    function renderVocabSlide(item) {
+      const imageSrc = `assets/generated/${vocabImageFiles[item.no - 1]}`;
+      return html`
+        <section class="slide" data-title="${item.no}. ${item.hanzi}">
+          <div class="slide-inner">
+            <article class="panel word-panel">
+              <div class="slide-topline">
+                <span>核心生詞 ${item.no} / 15</span>
+                <span class="tag">根據來源：生詞表</span>
+              </div>
+              <div class="word-main">
+                <h2 class="hanzi">${item.hanzi}</h2>
+                <div class="pinyin">${item.pinyin}</div>
+                <div class="meta-row">
+                  <span class="pos">${item.pos}</span>
+                  <span class="translation">${item.english}</span>
+                </div>
+              </div>
+              <div class="info-grid">
+                <div class="info-box wide">
+                  <span class="label">例句：教學補充</span>
+                  <p>${item.sentence}</p>
+                </div>
+                <div class="info-box">
+                  <span class="label">常見搭配：教學補充</span>
+                  <ul>${item.collocations.map(c => `<li>${c}</li>`).join("")}</ul>
+                </div>
+                <div class="info-box">
+                  <span class="label">課堂使用建議：教學補充</span>
+                  <p>請學生先說出生活情境，再替換句中資訊做個人化造句。</p>
+                </div>
+              </div>
+            </article>
+            <aside class="panel visual-panel">
+              <img class="slide-image" src="${imageSrc}" alt="${item.hanzi} 真實風格插圖">
+            </aside>
+          </div>
+        </section>`;
+    }
+
+    function renderPictureChoice() {
+      return html`
+        <section class="slide activity" data-title="活動：看圖選詞">
+          <div class="slide-inner">
+            <article class="panel">
+              <h2>看圖選詞</h2>
+              <p>看右方住宅情境圖，選出最適合的核心生詞。</p>
+              <div class="activity-image" aria-label="住宅比較情境圖">
+                <img src="assets/generated/activity-housing-choice.png" alt="住宅比較情境圖">
+              </div>
+              <div class="activity-grid" data-choice-group>
+                <button class="choice" data-correct="false" type="button">文章</button>
+                <button class="choice" data-correct="true" type="button">住宅</button>
+                <button class="choice" data-correct="false" type="button">此外</button>
+              </div>
+            </article>
+          </div>
+        </section>`;
+    }
+
+    function renderFill() {
+      return html`
+        <section class="slide activity" data-title="活動：句子填空">
+          <div class="slide-inner">
+            <article class="panel">
+              <h2>句子填空</h2>
+              <p>請用本課核心生詞完成句子。按下「顯示答案」後可自我檢查。</p>
+              <div class="fill-row">
+                <span>1. 來臺灣的 ______ 朋友常常需要租房子。</span>
+                <span class="answer">國際</span>
+              </div>
+              <div class="fill-row">
+                <span>2. ______ 屋齡老，這間公寓的租金比較便宜。</span>
+                <span class="answer">由於</span>
+              </div>
+              <div class="fill-row">
+                <span>3. 租房子以前，要先確認自己的 ______ 。</span>
+                <span class="answer">需求／預算</span>
+              </div>
+              <button class="btn" type="button" data-show-answers>顯示答案</button>
+            </article>
+          </div>
+        </section>`;
+    }
+
+    function renderMatching() {
+      return html`
+        <section class="slide activity" data-title="活動：拖拉配對">
+          <div class="slide-inner">
+            <article class="panel">
+              <h2>拖拉配對</h2>
+              <p>把左邊生詞拖到右邊相對應的意思。配對成功後方框會變色。</p>
+              <div class="matching">
+                <div class="drag-list">
+                  <div class="drag-item" draggable="true" data-match="budget">預算</div>
+                  <div class="drag-item" draggable="true" data-match="facilities">設備</div>
+                  <div class="drag-item" draggable="true" data-match="article">文章</div>
+                  <div class="drag-item" draggable="true" data-match="need">需求</div>
+                </div>
+                <div class="drop-list">
+                  <div class="drop-zone" tabindex="0" data-match="article">article, essay</div>
+                  <div class="drop-zone" tabindex="0" data-match="need">need, requirement</div>
+                  <div class="drop-zone" tabindex="0" data-match="facilities">facilities, equipment</div>
+                  <div class="drop-zone" tabindex="0" data-match="budget">budget</div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>`;
+    }
+
+    function renderPoll() {
+      return html`
+        <section class="slide activity" data-title="活動：IRS 造句互動">
+          <div class="slide-inner">
+            <article class="panel">
+              <h2>IRS 造句互動</h2>
+              <p>請學生用手機或舉手投票：哪一句最自然？投票後再請學生改寫成自己的句子。</p>
+              <div class="poll-options">
+                <button class="choice" type="button" data-poll="0">A. 無論是學習還是工作，租房子都很重要。</button>
+                <button class="choice" type="button" data-poll="1">B. 無論是房屋還是文章，租金都很重要。</button>
+                <button class="choice" type="button" data-poll="2">C. 由於此外，公寓比較便宜。</button>
+              </div>
+              <div id="pollResults">
+                <div class="poll-result"><span>A</span><div class="poll-bar"><span></span></div><b>0%</b></div>
+                <div class="poll-result"><span>B</span><div class="poll-bar"><span></span></div><b>0%</b></div>
+                <div class="poll-result"><span>C</span><div class="poll-bar"><span></span></div><b>0%</b></div>
+              </div>
+              <div class="info-box wide">
+                <span class="label">教師提示</span>
+                <p>答案 A 最自然。請學生接著用「由於」、「此外」或「需求」再造一句。</p>
+              </div>
+            </article>
+          </div>
+        </section>`;
+    }
+
+    function renderRoleplay() {
+      return html`
+        <section class="slide activity" data-title="活動：角色扮演">
+          <div class="slide-inner">
+            <article class="panel">
+              <h2>角色扮演</h2>
+              <p>兩人一組，使用本課生詞完成租屋諮詢對話。</p>
+              <div class="role-grid">
+                <div class="role-card">
+                  <h3>A：租客</h3>
+                  <p>說明你的預算、需求，以及想看的房屋類型。至少使用三個核心生詞。</p>
+                </div>
+                <div class="role-card">
+                  <h3>B：房仲</h3>
+                  <p>根據租客需求介紹一種住宅，並說明主要特色、設備與屋齡。</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>`;
+    }
+
+    function renderPictureTalk() {
+      return html`
+        <section class="slide activity" data-title="活動：看圖說話">
+          <div class="slide-inner">
+            <article class="panel">
+              <h2>看圖說話</h2>
+              <p>觀察圖片情境，請用 3 到 5 句話說明這個住宅適合誰。</p>
+              <div class="activity-image" aria-label="看圖說話住宅情境">
+                <img src="assets/generated/activity-speaking.png" alt="租屋看圖說話情境圖">
+              </div>
+              <div class="talk-grid">
+                <div class="talk-card">
+                  <h3>必用詞</h3>
+                  <p>住宅、需求、預算、設備、此外</p>
+                </div>
+                <div class="talk-card">
+                  <h3>句型支架</h3>
+                  <p>由於……，所以……。此外，……。我覺得這種住宅適合……。</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>`;
+    }
+
+    function renderGroupTask() {
+      return html`
+        <section class="slide activity" data-title="活動：小組任務">
+          <div class="slide-inner">
+            <article class="panel">
+              <h2>小組任務</h2>
+              <p>三到四人一組，設計一份「來臺灣租屋建議」。任務中若需要使用其他詞語，請在發表時標示為補充詞。</p>
+              <div class="group-grid">
+                <div class="group-card">
+                  <h3>任務步驟</h3>
+                  <label class="task-item"><input type="checkbox">選一種房屋類型。</label>
+                  <label class="task-item"><input type="checkbox">說明主要特色與設備。</label>
+                  <label class="task-item"><input type="checkbox">設定租客的預算與需求。</label>
+                  <label class="task-item"><input type="checkbox">用「由於」、「此外」各造一句。</label>
+                </div>
+                <div class="group-card">
+                  <h3>發表要求</h3>
+                  <p>每組 2 分鐘。至少使用 6 個核心生詞。補充詞請說明不是本次核心生詞。</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>`;
+    }
+
+    function renderActivity(activity) {
+      const renderers = {
+        "picture-choice": renderPictureChoice,
+        fill: renderFill,
+        matching: renderMatching,
+        poll: renderPoll,
+        roleplay: renderRoleplay,
+        "picture-talk": renderPictureTalk,
+        "group-task": renderGroupTask
+      };
+      return renderers[activity.kind]();
+    }
+
+    slidesEl.innerHTML = [
+      renderIntro(),
+      ...vocabulary.map(renderVocabSlide),
+      ...activities.map(renderActivity)
+    ].join("");
+
+    const slides = Array.from(document.querySelectorAll(".slide"));
+
+    slides.forEach((slide, index) => {
+      const option = document.createElement("option");
+      option.value = index;
+      option.textContent = `${index + 1}. ${slide.dataset.title}`;
+      jumpSelect.appendChild(option);
+    });
+
+    function showSlide(index) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === current));
+      counterEl.textContent = `${current + 1} / ${slides.length}`;
+      barEl.style.width = `${((current + 1) / slides.length) * 100}%`;
+      jumpSelect.value = String(current);
+      document.getElementById("prevBtn").disabled = current === 0;
+      document.getElementById("nextBtn").disabled = current === slides.length - 1;
+      window.scrollTo(0, 0);
+    }
+
+    document.getElementById("prevBtn").addEventListener("click", () => showSlide(current - 1));
+    document.getElementById("nextBtn").addEventListener("click", () => showSlide(current + 1));
+    jumpSelect.addEventListener("change", event => showSlide(Number(event.target.value)));
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "ArrowRight" || event.key === "PageDown") showSlide(current + 1);
+      if (event.key === "ArrowLeft" || event.key === "PageUp") showSlide(current - 1);
+    });
+
+    document.querySelectorAll("[data-choice-group] .choice").forEach(button => {
+      button.addEventListener("click", () => {
+        const correct = button.dataset.correct === "true";
+        button.classList.add(correct ? "correct" : "wrong");
+      });
+    });
+
+    document.querySelectorAll("[data-show-answers]").forEach(button => {
+      button.addEventListener("click", () => {
+        button.closest(".slide").querySelectorAll(".answer").forEach(answer => answer.classList.add("show"));
+      });
+    });
+
+    let draggedMatch = "";
+    document.querySelectorAll(".drag-item").forEach(item => {
+      item.addEventListener("dragstart", event => {
+        draggedMatch = item.dataset.match;
+        event.dataTransfer.setData("text/plain", draggedMatch);
+      });
+    });
+
+    document.querySelectorAll(".drop-zone").forEach(zone => {
+      zone.addEventListener("dragover", event => event.preventDefault());
+      zone.addEventListener("drop", event => {
+        event.preventDefault();
+        const match = event.dataTransfer.getData("text/plain") || draggedMatch;
+        if (match === zone.dataset.match) {
+          const dragged = document.querySelector(`.drag-item[data-match="${match}"]`);
+          zone.classList.add("matched");
+          zone.textContent = `${zone.textContent}：${dragged.textContent}`;
+          dragged.style.visibility = "hidden";
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-poll]").forEach(button => {
+      button.addEventListener("click", () => {
+        pollCounts[Number(button.dataset.poll)] += 1;
+        updatePoll();
+      });
+    });
+
+    function updatePoll() {
+      const total = pollCounts.reduce((sum, n) => sum + n, 0) || 1;
+      document.querySelectorAll(".poll-result").forEach((row, index) => {
+        const percent = Math.round((pollCounts[index] / total) * 100);
+        row.querySelector(".poll-bar span").style.width = `${percent}%`;
+        row.querySelector("b").textContent = `${percent}%`;
+      });
+    }
+
+    const initialSlide = Number(new URLSearchParams(window.location.search).get("slide") || 0);
+    showSlide(Number.isFinite(initialSlide) ? initialSlide : 0);
+  </script>
+</body>
+</html>
+
